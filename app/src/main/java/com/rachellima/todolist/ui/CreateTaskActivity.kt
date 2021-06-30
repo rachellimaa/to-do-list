@@ -1,5 +1,6 @@
 package com.rachellima.todolist.ui
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,16 @@ class CreateTaskActivity : AppCompatActivity() {
         binding = ActivityCreateTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (intent.hasExtra(TASK_ID)) {
+            val taskId = intent.getIntExtra(TASK_ID, 0)
+            TaskDataSource.findById(taskId)?.let {
+                binding.textInputTitle.text = it.title
+                binding.textInputDate.text = it.date
+                binding.tilHour.text = it.hour
+                binding.description.text = it.description
+            }
+        }
+
         insertListeners()
     }
 
@@ -43,8 +54,10 @@ class CreateTaskActivity : AppCompatActivity() {
                 .build()
 
             timerPicker.addOnPositiveButtonClickListener {
-                val minute = if (timerPicker.minute in 0..9 )"0${timerPicker.minute}" else "${timerPicker.minute}"
-                val hour = if (timerPicker.hour in 0..9 )"0${timerPicker.hour}" else "${timerPicker.hour}"
+                val minute =
+                    if (timerPicker.minute in 0..9) "0${timerPicker.minute}" else "${timerPicker.minute}"
+                val hour =
+                    if (timerPicker.hour in 0..9) "0${timerPicker.hour}" else "${timerPicker.hour}"
                 binding.tilHour.text = "${hour}:${minute}"
             }
 
@@ -62,14 +75,20 @@ class CreateTaskActivity : AppCompatActivity() {
                 title = binding.textInputTitle.text,
                 hour = binding.tilHour.text,
                 date = binding.textInputDate.text,
-                description = binding.description.text
+                description = binding.description.text,
+                id = intent.getIntExtra(TASK_ID, 0)
             )
             TaskDataSource.insertTask(task)
             Log.e("TAG", "add " + TaskDataSource.getList())
+            setResult(Activity.RESULT_OK)
+            finish()
         }
 
 
     }
 
+    companion object {
+        const val TASK_ID = "task_id"
+    }
 
 }

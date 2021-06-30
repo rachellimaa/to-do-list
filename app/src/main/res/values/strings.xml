@@ -8,4 +8,8 @@
     <string name="hour">Hora</string>
     <string name="create_task">Criar Tarefa</string>
     <string name="cancel">Cancelar</string>
+    <string name="new_task">Nova Tarefa</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Deletar</string>
+    <string name="label_empty">Ops! Você não tem\n nenhuma tarefa</string>
 </resources>
