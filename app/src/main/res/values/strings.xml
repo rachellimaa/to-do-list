@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">To do list</string>
+    <string name="tv_title">Tarefas de Hoje</string>
+    <string name="title_create_task">Criar Tarefa</string>
+    <string name="title">Título</string>
+    <string name="description">Descrição</string>
+    <string name="data">Data</string>
+    <string name="hour">Hora</string>
+    <string name="create_task">Criar Tarefa</string>
+    <string name="cancel">Cancelar</string>
+</resources>
